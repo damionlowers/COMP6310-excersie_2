@@ -94,16 +94,7 @@ def decrypt(encrypted):
     result = inverse_substitution_box(s_box)
     return result
 
-    #b_right, cipher = (encrypted >> 5), encrypted & 0b11111
-    #print("b_right: ", bin(b_right), "xor_2: ", cipher)
-    #permute = XOR(cipher, key)
-    #print("permute: ", permute)
-    #permute_inverse = permutation(permute)
-    #print("xor_1: ", permute_inverse)
-    #s_box = XOR(permute_inverse, key)
-    #print("s_box: ", s_box)
-    #result =  inverse_substitution_box(s_box)
-    #return result
+    
 
 # Excute's the Encryption and Decryption
 
@@ -139,16 +130,16 @@ plt.ylabel("Time (seconds) (log scale)") #Y label more descriptive
 plt.title("Brute-Force Attack Time")
 plt.grid(True)
 plt.xticks(key_lengths)
-plt.yscale('log')  # Log scale for y-axis
+plt.yscale('symlog', linthresh=1)  # symmetric Log scale for y-axis with a threshold of 1 ( scale transitions from lnear to log when y>=1)
 plt.tight_layout()
 plt.show()
 
-# print("\nBrute-force attack complexities and times (assuming 10 keys tested per second):")
-# for k, t in brute_force_results.items():
-#     attempts = 2**k
-#     minutes = t / 60
-#     hours = minutes / 60
-#     days = hours / 24
-#     print(f"Key length {k}: 2^{k} = {attempts} attempts")
-#     print(f"Time: {t:.2f} seconds, {minutes:.2f} minutes, {hours:.2f} hours, {days:.2f} days")
-#     print("-" * 50)
+print("\nBrute-force attack complexities and times (assuming 10 keys tested per second):")
+for k, t in brute_force_results.items():
+    attempts = 2**k
+    minutes = t / 60
+    hours = minutes / 60
+    days = hours / 24
+    print(f"Key length {k}: 2^{k} = {attempts} attempts")
+    print(f"Time: {t:.2f} seconds, {minutes:.2f} minutes, {hours:.2f} hours, {days:.2f} days")
+    print("-" * 50)
