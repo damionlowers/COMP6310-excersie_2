@@ -1,5 +1,9 @@
 import matplotlib.pyplot as plt
 
+BLOCK_SIZE = 4
+KEY_SIZE = 5  # Maximum key size
+ROUNDS = 2
+KEYS_PER_SECOND = 10
 # -*- coding: utf-8 -*-
 """Excersie2.ipynb
 
@@ -111,6 +115,7 @@ print("\nEncrypted:", bin(encrypted_value))
 
 decrypted_value=decrypt(encrypted_value)
 print("\nDecrypted:", bin(decrypted_value))
+
 
 # Brute-Force Attack Analysis
 def brute_force_attack(ciphertext, block_size, keys_per_second=KEYS_PER_SECOND):
