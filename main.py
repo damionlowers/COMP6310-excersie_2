@@ -1,16 +1,14 @@
-# This is a sample Python script.
+import unittest
+from excersie2 import substitution_box, inverse_substitution_box, XOR, permutation, inverse_permutation, encrypt, decrypt, brute_force_attack, BLOCK_SIZE, KEY_SIZE
 
-# Press ⌃R to execute it or replace it with your code.
-# Press Double ⇧ to search everywhere for classes, files, tool windows, actions, and settings.
+ROUNDS = 2
+class TestCipher(unittest.TestCase):
 
+    def test_encrypt_decrypt(self):
+        ExpectedValue = 0b1110
+        encrypted = encrypt(ROUNDS)
+        decrypted = decrypt(encrypted)
+        self.assertEqual(decrypted, ExpectedValue)  # Ensure decryption reverses encryption
 
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press ⌘F8 to toggle the breakpoint.
-
-
-# Press the green button in the gutter to run the script.
 if __name__ == '__main__':
-    print_hi('PyCharm')
-
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+    unittest.main()
