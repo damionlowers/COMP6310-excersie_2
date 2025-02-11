@@ -21,8 +21,8 @@ key= int(input("Enter up to a 5-bit key, e.g., 10111 ") ,2)
 
 # Initial Values for the Encryption and Decryption
 
-block= 0b1110 #4-bit binary represntation of 14
-key = 0b1011  #5-bit key representation of 23
+# block= 0b1110 #4-bit binary represntation of 14
+# key = 0b1011  #5-bit key representation of 23
 
 # Substitution-Box Function
 def substitution_box(cipher, key):
