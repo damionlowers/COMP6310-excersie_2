@@ -13,16 +13,13 @@ Original file is located at
     https://colab.research.google.com/drive/1JYUACfJXmrZWai2f2Hjb_oBGHb0bWjn0
 """
 
-#block = 0b1110
-#key = 0b10111
+
 
 block= int(input("Enter a 4-bit block, e.g., 1110 ") ,2)
 key= int(input("Enter up to a 5-bit key, e.g., 10111 ") ,2)
 
 # Initial Values for the Encryption and Decryption
 
-block= 0b1110 #4-bit binary represntation of 14
-key = 0b1011  #5-bit key representation of 23
 
 # Substitution-Box Function
 def substitution_box(cipher, key):
@@ -84,7 +81,7 @@ def encrypt(rounds=2):
 
 def decrypt(encrypted):
     print("\n......Starting Decryption......")
-
+    
     permute = XOR(encrypted, key)
     print("xor_2:", bin(permute))
 
@@ -146,12 +143,12 @@ plt.yscale('log')  # Log scale for y-axis
 plt.tight_layout()
 plt.show()
 
-print("\nBrute-force attack complexities and times (assuming 10 keys tested per second):")
-for k, t in brute_force_results.items():
-    attempts = 2**k
-    minutes = t / 60
-    hours = minutes / 60
-    days = hours / 24
-    print(f"Key length {k}: 2^{k} = {attempts} attempts")
-    print(f"Time: {t:.2f} seconds, {minutes:.2f} minutes, {hours:.2f} hours, {days:.2f} days")
-    print("-" * 50)
+# print("\nBrute-force attack complexities and times (assuming 10 keys tested per second):")
+# for k, t in brute_force_results.items():
+#     attempts = 2**k
+#     minutes = t / 60
+#     hours = minutes / 60
+#     days = hours / 24
+#     print(f"Key length {k}: 2^{k} = {attempts} attempts")
+#     print(f"Time: {t:.2f} seconds, {minutes:.2f} minutes, {hours:.2f} hours, {days:.2f} days")
+#     print("-" * 50)
