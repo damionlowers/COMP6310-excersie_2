@@ -18,18 +18,14 @@ Original file is located at
 block= int(input("Enter a 4-bit block, e.g., 1110 ") ,2)
 key= int(input("Enter up to a 5-bit key, e.g., 10111 ") ,2)
 
-# Initial Values for the Encryption and Decryption
-
-# block= 0b1110 #4-bit binary represntation of 14
-# key = 0b1011  #5-bit key representation of 23
 
 # Substitution-Box Function
 def substitution_box(cipher, key):
     return (5* block +(key & 0b1111)) % 16 #This ensures that only the last 4 bits of the key is used.
 
 # Inverse Substitution
-def inverse_substitution_box(chiper):
-    return (13*(chiper-(key & 0b1111))) % 16 # Reverses the Substitution-Box Transformation
+def inverse_substitution_box(cipher, key):
+    return (13*(cipher-(key & 0b1111))) % 16 # Reverses the Substitution-Box Transformation
 
 # XOR Function
 def XOR(block, key):
@@ -43,8 +39,6 @@ def permutation(block):
             ((block & 0b0010) << 1) |  # Move bit 1 to bit 2
             ((block & 0b0001) << 3))   # Move bit 0 to bit 3
 
-#def permutation(block):
-  #return ((block & 0b10000 >> 3)) | (block & 0b01000) | ((block & 0b00100)>> 2) |((block & 0b00010) << 1) | ((block & 0b00001)<<4) # Reorders the bits
 
 #Inverse Permutation
 def inverse_permutation(block):
@@ -54,46 +48,47 @@ def inverse_permutation(block):
             ((block & 0b0001) << 3))   # Move bit 0 to bit 3
 
 
-#def inverse_permutation(block):
-  #return ((block & 0b10000)>>4) | (block & 0b01000) | ((block & 0b00100)>>1) | ((block & 0b00010)<< 3) | ((block & 0b00001)<<2) #Reverses the permutation function
+
 
 # Encryption Scheme
 
 def encrypt(rounds=2):
-    print(block)
+    print("\noriginal block: ", bin(block))
     print("\n.....Starting Encryption.....")
     encrypted = block
     for i in range (rounds):
         if i ==0:
             substitute = substitution_box(encrypted, key)
-            print("s_box:", substitute)
+            print("s_box:", bin(substitute))
             encrypted = XOR(substitute, key)
             print("xor_1:", bin(encrypted))
         else:
-            permute = inverse_permutation(encrypted)
-            print("permute:", permute)
+            permute = permutation(encrypted)
+            print("permute:", bin(permute))
             encrypted = XOR(permute, key)
-            print("xor_2:", encrypted)
+            print("xor_2:", bin(encrypted))
 
     b_left, b_right = block >> 2, block & 0b11
     result = (b_right << 5) | encrypted
-    return result
+    final_result = (permutation(result & 0b1111) << 3)| result
+    return final_result
 
 # Decryption Scheme
 
 def decrypt(encrypted):
     print("\n......Starting Decryption......")
     
-    permute = XOR(encrypted, key)
-    print("xor_2:", bin(permute))
+    permute = (permutation(encrypted  & 0b1111) <<3 )| encrypted
+    xor = XOR(permute, key)
+    print("xor_2:", bin(xor))
 
-    permute_inverse = inverse_permutation(permute)
+    permute_inverse = inverse_permutation(xor)
     print("permute_inverse:", bin(permute_inverse))
 
     s_box = XOR(permute_inverse, key)
     print("xor_1:", bin(s_box))
 
-    result = inverse_substitution_box(s_box)
+    result = inverse_substitution_box(s_box, key)
     return result
 
     
