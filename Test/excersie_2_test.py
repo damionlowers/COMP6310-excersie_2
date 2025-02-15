@@ -1,5 +1,5 @@
 import unittest
-from Excersie.excersie2 import encrypt, decrypt
+from Excersie.excersie_2 import encrypt, decrypt
 
 ROUNDS = 2
 class TestCipher(unittest.TestCase):
