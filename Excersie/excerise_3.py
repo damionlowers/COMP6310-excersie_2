@@ -25,7 +25,7 @@
 import hashlib
 import random
 
-def test_hash_function(hash_name, num_trials=1000000):
+def test_hash_function(hash_name, num_trials=10000):
     """Tests a hash function for collisions and second preimage resistance."""
 
     print(f"Testing {hash_name}...")
@@ -47,6 +47,8 @@ def test_hash_function(hash_name, num_trials=1000000):
             hash_value = hashlib.sha256(input_string.encode()).hexdigest()
         else:
             raise ValueError("Invalid hash function name.")
+
+        print(f"Testing Hash {input_string}...")
 
 
         # Collision detection
