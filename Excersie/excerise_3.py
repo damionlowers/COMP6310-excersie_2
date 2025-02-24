@@ -25,7 +25,7 @@
 import hashlib
 import random
 
-def test_hash_function(hash_name, num_trials=10000):
+def test_hash_function(hash_name, num_trials=1000000):
     """Tests a hash function for collisions and second preimage resistance."""
 
     print(f"Testing {hash_name}...")
